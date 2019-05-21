@@ -1,0 +1,13 @@
+{
+    "name": "expression/parse",
+    "description": "公式解析",
+    "type": "library",
+    "authors": [
+        {
+            "name": "fanglexue",
+            "email": "15216647880@163.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
