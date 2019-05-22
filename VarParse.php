@@ -11,7 +11,7 @@ namespace expression\parse;
 
 use expression\parse\exception\ParseError;
 
-class Myvar {
+class VarParse {
 
     public $vars = [];
     public $_var = [];
