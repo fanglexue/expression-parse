@@ -7,6 +7,9 @@
  * Time: 2:23 PM
  */
 
+
+namespace expression\parse;
+
 use expression\parse\Token;
 use expression\parse\Context;
 use expression\parse\Scanner;
