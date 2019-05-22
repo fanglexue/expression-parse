@@ -13,5 +13,6 @@
     "autoload": {
         "psr-4": {
             "expression\\parse\\": "parse/"
+        }
     }
 }
