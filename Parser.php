@@ -17,6 +17,23 @@ use expression\parse\Scanner;
 use expression\parse\exception\ParseError;
 use expression\parse\exception\RuntimeError;
 
+const T_NUMBER      = 1,  // 
+      T_IDENT       = 2,  // 
+      T_FUNCTION    = 4,  // 
+      T_POPEN       = 8,  // (
+      T_PCLOSE      = 16,  // )
+      T_COMMA       = 32, // ,
+      T_OPERATOR    = 64, // 
+      T_PLUS        = 65, // +
+      T_MINUS       = 66, // -
+      T_TIMES       = 67, // *
+      T_DIV         = 68, // /
+      T_MOD         = 69, // %
+      T_POW         = 70, // ^
+      T_UNARY_PLUS  = 71, // + 
+      T_UNARY_MINUS = 72, // - 
+      T_NOT         = 73; // ! 
+
 class Parser
 {
     const ST_1 = 1, // 等待一元操作数
