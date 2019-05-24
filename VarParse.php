@@ -14,9 +14,13 @@ use expression\parse\exception\ParseError;
 class VarParse {
 
     public $vars = [];
+
+    private $fns = [];
+
     public $_var = [];
 
-    const PATTEN = '/\{#\w{1,}\}/';
+
+    const  PATTEN = '/(?:\{#\w{1,}\}?)|(?:\{@\w{1,}\}?)/';
 
     public function __construct(){}
 
@@ -24,25 +28,51 @@ class VarParse {
     public function _replace($subject){
         return preg_replace_callback(self::PATTEN,
             function($var){
-                $var = $this->_cvar($var[0]);
-                if(isset($this->_var[$var])){
-                    return $this->_var[$var];
-                }
-                throw new ParseError('请注册变量');
+                $type = $this->getVarType($var[0]); 
+                $var = $this->getKey($var[0]); 
+                if($type == 1){ 
+                    if(isset($this->_var[$var])){
+                         return $this->_var[$var];
+                    }
+                    throw new ParseError('please register variables '. $var .'!');
+               }else{
+                   return $var;
+               }
             }
             ,$subject
         );
     }
 
 
-    /**获取字符串中所有变量**/
-    public function getVars($subject){
+    /**
+     * Get all variables from a string 
+     */
+    public function getPatten($subject){
         preg_match_all(self::PATTEN,$subject,$out,PREG_SET_ORDER);
-        return $out;
+        foreach($out as $k => $v){
+            $type = $this->getVarType($v[0]);         
+            $vl = $this->getKey($v[0]); 
+            if($type == 1){
+                array_push($this->vars, $vl); 
+            }else{
+                array_push($this->fns, $vl); 
+            }        
+        }
+        return $out; 
+    } 
+
+
+    public function getVars(){
+        return $this->vars;
+    }
+    
+    public function getFns(){
+        return $this->fns;
     }
 
+
     /*
-     * 注册变量
+     * register variables _cvar
      */
 
     public function assign($data, $value = ''){
@@ -60,21 +90,32 @@ class VarParse {
     }
 
 
+
+    /**
+     * Identify whether the matched string is a variable or a function  
+     *
+     * return int   1: variable  2: function
+     */
+    private function getVarType($var){
+        if($var[1] != '#' &&  $var[1] != '@'){
+            throw new ParseError("Parse error");
+        }
+        return  $r = $var[1] == '#' ? 1 : 2;
+    }
+    
+
     /*
-     *  获取变量$key
+     *  Get key 
     */
-    public function _cvar($var) {
-        $sort_char = ['{','#'];
-        $check_char_len = 2; //
-        for($i=0; $i< $check_char_len; $i++){
-            //按照顺序检查变量
-            if($var[0] != $sort_char[$i]){
-                throw new ParseError('变量解析错误');
-            }
-            $var = substr($var,1,strlen($var));
+   private  function getKey($var) {
+        // Check variables in order .
+        if($var[0] != '{' ||  ($var[1] != '@' && $var[1] != '#')){
+            throw new ParseError('Parse error');
         }
 
-        return  $var = trim(substr($var,0,-1));
+        $var = substr($var,2,strlen($var));
+        $var = trim(substr($var,0,-1));
+        return  $var;
     }
 
 }
