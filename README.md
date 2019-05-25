@@ -6,7 +6,7 @@
 
 ```
 compposer require expression/parse:1.0.8
-composer intall expression/parse
+
 ```
 ### Excample
 
