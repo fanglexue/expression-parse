@@ -8,4 +8,6 @@
 
 namespace  expression\parse\exception;
 
-class SyntaxError extends \Exception{}
+use \Exception;
+
+class SyntaxError extends Exception{}

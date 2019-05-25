@@ -7,6 +7,6 @@
  */
 
 namespace expression\parse\exception;
+use \Exception;
 
-
-class ParseError extends \Exception{}
+class ParseError extends Exception{}
