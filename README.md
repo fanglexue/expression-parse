@@ -1,14 +1,14 @@
-#运算解析 
+# 运算解析 
 
-##Quick Start
+## Quick Start
 
-###Installation
+### Installation
 
+```
 compposer require expression/parse:1.0.8
-
 composer intall expression/parse
-
-###Excample
+```
+### Excample
 
 ```
 use expression\parse\Parser;
