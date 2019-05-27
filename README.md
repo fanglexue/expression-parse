@@ -11,6 +11,7 @@ compposer require expression/parse:1.0.8
 ### Excample
 
 ```
+require(vendor/autoload.php);
 use expression\parse\Parser;
 use expression\parse\VarParse;
 use expression\parse\Context;
@@ -27,6 +28,6 @@ $ctx = new Context;
 $ctx->def('bar', function($a, $b) { return $a * $b; });
 
 $exp = $vp->_replace($exp);
-print_r(Parser::parse($exp, $ctx));
+print_r(Parser::parse($exp, $ctx)); 
 
 ```
