@@ -4,10 +4,24 @@
 
 ### Installation
 
+composer.json 中新增
 ```
-compposer require expression/parse:1.0.8
+ "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:fanglexue/expression-parse.git"
+        },
+        {
+            "packagist": false
+        }
+    ]
+```
+```
+composer require expression/parse:1.0.8
 
 ```
+
+
 ### Excample
 
 ```
