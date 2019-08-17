@@ -4,27 +4,22 @@
 
 ### 安装 
 
-composer.json 中新增
 ```
- "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:fanglexue/expression-parse.git"
-        },
-        {
-            "packagist": false
-        }
-    ]
+composer config repositories.expression/parse vcs https://github.com/fanglexue/expression-parse
 ```
+
 ```
 composer require expression/parse:1.0.8
-
 ```
 
 
 ### 示例 
 
+
+
 ```
+vim index.php
+
 require(vendor/autoload.php);
 use expression\parse\Parser;
 use expression\parse\VarParse;
@@ -43,6 +38,8 @@ $ctx->def('bar', function($a, $b) { return $a * $b; });
 
 $exp = $vp->_replace($exp);
 print_r(Parser::parse($exp, $ctx)); 
+
+php -f index.php
 
 ```
 
